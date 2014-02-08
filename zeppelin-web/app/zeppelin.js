@@ -20,7 +20,7 @@ function Zeppelin(arg){
     }
     
     this.getRestURL = function(){
-        return "http://"+window.location.host+"/caja";
+        return "http://"+window.location.host+"/cxf/zeppelin";
     }
     
     this.isDevMode = function(){

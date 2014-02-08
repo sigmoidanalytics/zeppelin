@@ -391,6 +391,7 @@ App.ReportLinkView = Ember.View.extend({
                             planInfo = planInfo.substring(1);
                         }
                         $('#visualizationContainer').append('<div class="visTitle">'+planInfo+"</div>");
+
                         $('<div />', {                               
                             name : plan.id,
                             id : plan.id,
@@ -399,8 +400,11 @@ App.ReportLinkView = Ember.View.extend({
                         }).appendTo('#visualizationContainer');
 
                         caja.load(document.getElementById(plan.id), undefined, function(frame) {
+                            console.log("CAJA LOAD= %o", zeppelin.getWebResourceURL(model.id, historyId, plan.id));
                             frame.code(zeppelin.getWebResourceURL(model.id, historyId, plan.id), 'text/html').run();
+
                         });
+
                     }
                 }
 

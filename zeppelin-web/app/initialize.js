@@ -41,11 +41,13 @@ console.log('TRACE: app.js-> localStorage:Zeppelin.authenticated=' + localStorag
 console.log("TRACE: app.js-> Ember.TEMPLATES: ", Ember.TEMPLATES);
 
 // initialize caja
-/*
+
 caja.initialize({
-    //'https://caja.appspot.com/',
     cajaServer: "http://"+window.location.host+"/caja",
-    resources:'https://caja.appspot.com/',
+    resources: "http://"+window.location.host+"/js/caja",
+
+    //cajaServer: "http://localhost:8887",
+    //resources:'https://caja.appspot.com/',
     debug: true
 });
-*/
+
