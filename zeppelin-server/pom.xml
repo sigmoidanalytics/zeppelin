@@ -14,7 +14,15 @@
   <version>0.3.1-SNAPSHOT</version>
   <name>Zeppelin: Server</name>
   <url>http://www.nflabs.com</url>
-  
+
+  <repositories>
+    <!-- For dependency Caja -->
+    <repository>
+      <id>Caja svn maven repository</id>
+      <url>http://google-caja.googlecode.com/svn/maven/</url>
+    </repository>
+  </repositories>
+    
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -38,6 +46,18 @@
       <artifactId>slf4j-log4j12</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>caja</groupId>
+      <artifactId>caja</artifactId>
+      <version>r5127</version>
+      <exclusions>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xercesImpl</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>

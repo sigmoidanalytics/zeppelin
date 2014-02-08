@@ -391,15 +391,15 @@ App.ReportLinkView = Ember.View.extend({
                             planInfo = planInfo.substring(1);
                         }
                         $('#visualizationContainer').append('<div class="visTitle">'+planInfo+"</div>");
-                        $('<iframe />', {                               
+                        $('<div />', {                               
                             name : plan.id,
                             id : plan.id,
-                            src : zeppelin.getWebResourceURL(model.id, historyId, plan.id),
-                            scrolling : 'auto'
+                            //src : zeppelin.getWebResourceURL(model.id, historyId, plan.id),
+                            //scrolling : 'auto'
                         }).appendTo('#visualizationContainer');
 
-                        $('#'+plan.id).load(function(c,d){
-                            //console.log("iframe %o %o", c,d);
+                        caja.load(document.getElementById(plan.id), undefined, function(frame) {
+                            frame.code(zeppelin.getWebResourceURL(model.id, historyId, plan.id), 'text/html').run();
                         });
                     }
                 }

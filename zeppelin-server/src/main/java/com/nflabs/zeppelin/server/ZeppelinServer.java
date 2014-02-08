@@ -20,6 +20,10 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.caja.reporting.BuildInfo;
+import com.google.caja.service.CajolingService;
+import com.google.caja.service.CajolingServlet;
+import com.google.caja.service.ProxyHandler;
 import com.nflabs.zeppelin.conf.ZeppelinConfiguration;
 import com.nflabs.zeppelin.conf.ZeppelinConfiguration.ConfVars;
 import com.nflabs.zeppelin.rest.ZANRestApi;
@@ -51,10 +55,12 @@ public class ZeppelinServer extends Application {
 		final ServletContextHandler restApi = setupRestApiContextHandler(); 
 		//Web UI
 		final WebAppContext webApp = setupWebAppContext(conf);
+		//Caja
+		final ServletContextHandler caja = setupCajaContext(port);
 
         // add all handlers
 	    ContextHandlerCollection contexts = new ContextHandlerCollection();
-	    contexts.setHandlers(new Handler[]{restApi, webApp});
+	    contexts.setHandlers(new Handler[]{restApi, webApp, caja});
 	    server.setHandler(contexts);
 	        
 	    LOG.info("Start zeppelin server");
@@ -114,6 +120,22 @@ public class ZeppelinServer extends Application {
             webApp.setWar(webapp.getAbsolutePath());
         }
         return webApp;
+    }
+    
+    private static ServletContextHandler setupCajaContext(int port){
+		final ServletHolder cxfServletHolder = new ServletHolder(
+				new CajolingServlet(new CajolingService(
+						BuildInfo.getInstance(), "http://localhost:" + port)));
+		
+		//cxfServletHolder.setInitParameter("javax.ws.rs.Application", ZeppelinServer.class.getName());
+		cxfServletHolder.setName("caja");
+		cxfServletHolder.setForcedPath("caja");
+
+		final ServletContextHandler cxfContext = new ServletContextHandler();
+		cxfContext.setSessionHandler(new SessionHandler());
+		cxfContext.setContextPath("/caja");
+		cxfContext.addServlet( cxfServletHolder, "/*" );
+        return cxfContext;
     }
 
 	public ZeppelinServer() throws Exception {

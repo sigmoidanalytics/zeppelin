@@ -1,5 +1,6 @@
 body {
   padding-top: 50px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .report {
@@ -163,13 +164,14 @@ body {
 
 /* First level of nav */
 .bs-sidenav {
+  font-size: 12px;
+  line-height: 20px;
   margin-top: 30px;
   margin-bottom: 30px;
   padding-top:    10px;
   padding-bottom: 10px;
-  text-shadow: 0 1px 0 #fff;
-  background-color: #f7f5fa;
   border-radius: 5px;
+  border: 1px solid #AAAAAA;
 }
 
 /* All levels of nav */
