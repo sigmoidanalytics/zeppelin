@@ -341,19 +341,6 @@
         <enabled>false</enabled>
       </snapshots>
    </repository>
-
-    <!-- for for jdo/jdo2-api/2.3-ec -->
-    <repository>
-      <id>cdh-repository</id>
-      <name>CDH Repository</name>
-      <url>https://repository.cloudera.com/artifactory/cloudera-repos</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>    
   </repositories>
 
   <pluginRepositories>
