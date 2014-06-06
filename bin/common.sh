@@ -58,6 +58,14 @@ if [ "x$ZEPPELIN_API_WAR" == "x" ]; then
     fi
 fi
 
+if [ "x$ZEPPELIN_SHARKUI_WAR" == "x" ]; then
+    if [ -d "${ZEPPELIN_HOME}/zeppelin-sharkui/src/main/swagger" ]; then
+        export ZEPPELIN_SHARKUI_WAR="${ZEPPELIN_HOME}/zeppelin-sharkui/src/main/swagger"
+    else
+        export ZEPPELIN_SHARKUI_WAR=`find ${ZEPPELIN_HOME} -name "zeppelin-sharkui-*.war"`
+    fi
+fi
+
 if [ "x$ZEPPELIN_JOB_DIR" == "x" ]; then
     export ZEPPELIN_JOB_DIR="$ZEPPELIN_HOME/jobs"
 fi
@@ -110,7 +118,7 @@ fi
 export ZEPPELIN_CLASSPATH
 export CLASSPATH+=${ZEPPELIN_CLASSPATH}
 
-# Text encoding for 
+# Text encoding for
 # read/write job into files,
 # receiving/displaying query/result.
 if [ "x$ZEPPELIN_ENCODING" == "x" ]; then

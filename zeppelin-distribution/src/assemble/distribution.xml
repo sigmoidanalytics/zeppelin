@@ -9,17 +9,18 @@
   </formats>
   <includeBaseDirectory>true</includeBaseDirectory>
   <baseDirectory>zeppelin-${project.version}</baseDirectory>
- 
+
   <dependencySets>
     <dependencySet>
-      <!-- Enable access to all projects in the current multimodule build! 
+      <!-- Enable access to all projects in the current multimodule build!
       <useAllReactorProjects>true</useAllReactorProjects> -->
       <!-- Now, select which projects to include in this module-set. -->
       <includes>
         <include>com.nflabs.zeppelin:zeppelin-cli</include>
         <include>com.nflabs.zeppelin:zeppelin-server</include>
         <include>com.nflabs.zeppelin:zeppelin-web</include>
-	<include>com.nflabs.zeppelin:zeppelin-api-ui</include>
+    	<include>com.nflabs.zeppelin:zeppelin-api-ui</include>
+        <include>com.nflabs.zeppelin:zeppelin-sharkui</include>
       </includes>
       <useProjectArtifact>false</useProjectArtifact>
       <useTransitiveDependencies>false</useTransitiveDependencies>

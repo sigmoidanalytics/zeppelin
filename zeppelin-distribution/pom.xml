@@ -12,8 +12,8 @@
   <packaging>pom</packaging>
   <name>Zeppelin: Packaging distribution</name>
 
-  <!-- NOTE: These dependency declarations are only required to sort this project to the 
-       end of the line in the multimodule build. 
+  <!-- NOTE: These dependency declarations are only required to sort this project to the
+       end of the line in the multimodule build.
     -->
   <dependencies>
     <dependency>
@@ -44,6 +44,12 @@
     </dependency>
     <dependency>
       <artifactId>zeppelin-api-ui</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <version>${project.version}</version>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <artifactId>zeppelin-sharkui</artifactId>
       <groupId>${project.groupId}</groupId>
       <version>${project.version}</version>
       <type>war</type>

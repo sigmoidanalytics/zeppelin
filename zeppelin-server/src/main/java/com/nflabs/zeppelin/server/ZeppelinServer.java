@@ -60,10 +60,11 @@ public class ZeppelinServer extends Application {
 		//Web UI
 		final WebAppContext webApp = setupWebAppContext(conf);
 		final WebAppContext webAppSwagg = setupWebAppSwagger(conf);
+        final WebAppContext sharkUiWebAppSwagg = setupSharkUiWebAppSwagger(conf);
 
         // add all handlers
 	    ContextHandlerCollection contexts = new ContextHandlerCollection();
-	    contexts.setHandlers(new Handler[]{swagger, restApi, webApp, webAppSwagg});
+	    contexts.setHandlers(new Handler[]{swagger, restApi, webApp, webAppSwagg, sharkUiWebAppSwagg});
 	    server.setHandler(contexts);
 
 	    LOG.info("Start zeppelin server");
@@ -150,26 +151,47 @@ public class ZeppelinServer extends Application {
         return webApp;
     }
 
-  /**
-   * Handles the WebApplication for Swagger-ui
-   *
-   * @return WebAppContext with swagger ui context
-   */
-  private static WebAppContext setupWebAppSwagger(ZeppelinConfiguration conf) {
-    WebAppContext webApp = new WebAppContext();
-    File webapp = new File(conf.getString(ConfVars.ZEPPELIN_API_WAR));
+    /**
+    * Handles the WebApplication for Swagger-ui
+    *
+    * @return WebAppContext with swagger ui context
+    */
+    private static WebAppContext setupWebAppSwagger(ZeppelinConfiguration conf) {
+        WebAppContext webApp = new WebAppContext();
+        File webapp = new File(conf.getString(ConfVars.ZEPPELIN_API_WAR));
 
-    if (webapp.isDirectory()) {
-      webApp.setResourceBase(webapp.getPath());
-    } else {
-      webApp.setWar(webapp.getAbsolutePath());
+        if (webapp.isDirectory()) {
+          webApp.setResourceBase(webapp.getPath());
+        } else {
+          webApp.setWar(webapp.getAbsolutePath());
+        }
+        webApp.setContextPath("/docs");
+        webApp.setParentLoaderPriority(true);
+        // Bind swagger-ui to the path HOST/docs
+        webApp.addServlet(new ServletHolder(new DefaultServlet()), "/docs/*");
+        return webApp;
     }
-    webApp.setContextPath("/docs");
-    webApp.setParentLoaderPriority(true);
-    // Bind swagger-ui to the path HOST/docs
-    webApp.addServlet(new ServletHolder(new DefaultServlet()), "/docs/*");
-    return webApp;
-  }
+
+    /**
+    * Handles the WebApplication for Swagger-ui
+    *
+    * @return WebAppContext with swagger ui context
+    */
+    private static WebAppContext setupSharkUiWebAppSwagger(ZeppelinConfiguration conf) {
+        WebAppContext webApp = new WebAppContext();
+        File webapp = new File(conf.getString(ConfVars.ZEPPELIN_SHARKUI_WAR));
+
+        if (webapp.isDirectory()) {
+          webApp.setResourceBase(webapp.getPath());
+        } else {
+          webApp.setWar(webapp.getAbsolutePath());
+        }
+        webApp.setContextPath("/sharkui");
+        webApp.setParentLoaderPriority(true);
+        // Bind swagger-ui to the path HOST/sharkui
+        webApp.addServlet(new ServletHolder(new DefaultServlet()), "/sharkui/*");
+        return webApp;
+    }
 
 	public ZeppelinServer() throws Exception {
 		this.schedulerFactory = new SchedulerFactory();
