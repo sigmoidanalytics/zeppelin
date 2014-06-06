@@ -10,8 +10,8 @@ sharkcontrollers.controller('StagesCtrl',function($scope,$http,IdService) {
 
     $scope.ip = "http://localhost";
 
-    $http({method: 'GET', url: $scope.ip+':8080/json/'}).
-    // $http.get('jsons/master1.json').
+    // $http({method: 'GET', url: $scope.ip+':8080/json/'}).
+    $http.get('jsons/master1.json').
     success(function(data, status, headers, config) {
     $scope.workers = data.workers;
 
@@ -20,8 +20,8 @@ sharkcontrollers.controller('StagesCtrl',function($scope,$http,IdService) {
 
     });
 
-    $http({method: 'GET', url: $scope.ip+':4040/storage/json/'}).
-    /*$http.get('jsons/storage.json').*/
+    // $http({method: 'GET', url: $scope.ip+':4040/storage/json/'}).
+    $http.get('jsons/storage.json').
     success(function(data, status, headers, config) {
     $scope.storageInfo = data.storageInfo;
     }).
@@ -29,8 +29,8 @@ sharkcontrollers.controller('StagesCtrl',function($scope,$http,IdService) {
 
     });
 
-    $http({method: 'GET', url: $scope.ip+':4040/executors/json/'}).
-    /*$http.get('jsons/executors.json').*/
+    // $http({method: 'GET', url: $scope.ip+':4040/executors/json/'}).
+    $http.get('jsons/executors.json').
     success(function(data, status, headers, config) {
     $scope.memUsed = data.memUsed;
     $scope.maxMem = data.maxMem;
@@ -41,8 +41,8 @@ sharkcontrollers.controller('StagesCtrl',function($scope,$http,IdService) {
 
     });
 
-    $http({method: 'GET', url: $scope.ip+':4040/stages/json/'}).
-    // $http.get('jsons/stages.json').
+    // $http({method: 'GET', url: $scope.ip+':4040/stages/json/'}).
+    $http.get('jsons/stages.json').
     success(function(data, status, headers, config) {
     $scope.stage = data;
     $scope.id = IdService.get();

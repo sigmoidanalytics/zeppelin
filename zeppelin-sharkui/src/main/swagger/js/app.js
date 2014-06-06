@@ -12,7 +12,7 @@ var sharkapp = angular.module('myApp', [
 ]);
 
 sharkapp.config(['$routeProvider', function($routeProvider) {
-  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  /*delete $httpProvider.defaults.headers.common['X-Requested-With'];*/
 
   $routeProvider.when('/query', {templateUrl: 'partials/query.html', controller: 'QueryCtrl'});
   $routeProvider.when('/monitoring', {templateUrl: 'partials/monitoring.html', controller: 'MonitoringCtrl'});
